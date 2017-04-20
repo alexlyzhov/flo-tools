@@ -1,0 +1,4 @@
+*.pyc
+cur
+data
+.ipynb_checkpoints
