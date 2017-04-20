@@ -2,6 +2,14 @@ import numpy as np
 import matplotlib.colors
 
 def flow_to_color(flow):
+    '''
+    Middlebury colorcoding of optical flow
+    Returns color image with hue representing vector angle
+    and saturation representing vector module
+    
+    Keyword arguments:
+        flow -- optical flow to colorcode
+    '''
     rho = np.sqrt(flow[:, :, 0] ** 2 + flow[:, :, 1] ** 2)
     max_rho = np.max(rho)
     phi = np.arctan2(flow[:, :, 1], flow[:, :, 0])
@@ -15,6 +23,16 @@ def flow_to_color(flow):
     return img
 
 def warp_img(img, flow, forward, over_from_points, init_zeros):
+    '''
+    Returns image warped according to an optical flow
+    
+    Keyword arguments:
+        img -- image to warp
+        flow -- optical flow between a pair of images
+        forward (bool) -- warp forward vs backward
+        over_from_points (bool) -- warp over from-points vs to-points
+        init_zeros (bool) -- init with zeros vs with img
+    '''
     if init_zeros:
         warp = np.zeros_like(img)
     else:
