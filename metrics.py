@@ -41,13 +41,19 @@ def ang_error(flows):
     '''
     norm_flows = []
     for i in xrange(2):
+        # add elems containing ones along last axis and get a flow with 3d vectors
         flow3d = np.append(flows[i], np.ones(flows[i].shape[:-1] + (1,)), axis = 2)
+        
         norm = np.linalg.norm(flow3d, axis = 2)
-        norm = np.stack([norm] * 3, axis = 2)
+        # broadcasting doesn't work with np.divide so repeat the array
+        # norm = np.stack([norm] * 3, axis = 2) # obsolete
+        norm = np.repeat(norm[:, :, np.newaxis], repeats = 3, axis = -1)
+        # normalize flow with 3d vectors
+        # np.divide instead of "/" to check for zeros on-the-fly
         norm_flow = np.divide(flow3d, norm, out = np.zeros_like(flow3d), where = (norm != 0))
         norm_flows.append(norm_flow)
-    dot = np.sum(np.multiply(norm_flows[0], norm_flows[1]), axis = 2)
-    dot /= np.max(np.abs(dot)) # normalize and take arccos(dot_product)
+    dot = np.sum(np.multiply(norm_flows[0], norm_flows[1]), axis = 2) # dot product
+    dot /= np.max(np.abs(dot)) # normalize dot product
     ang = np.arccos(dot)
     return np.mean(ang)
 
