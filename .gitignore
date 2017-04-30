@@ -1,4 +1,7 @@
 *.pyc
-cur
+nasonov_warp
 data
+mydata
+data_small
+mydata_small
 .ipynb_checkpoints
