@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.colors
 
-def flow_to_color(flow):
+def flow_to_color(flow, norm):
     '''
     Middlebury colorcoding of optical flow
     Returns color image with hue representing vector angle
@@ -16,7 +16,10 @@ def flow_to_color(flow):
     phi[phi < 0] = 2 * np.pi + phi[phi < 0]
     
     hue = phi / (2 * np.pi)
-    sat = rho / max_rho
+    if norm:
+        sat = rho / max_rho
+    else:
+        sat = rho
     val = np.ones((flow.shape[0], flow.shape[1]))
     
     img = matplotlib.colors.hsv_to_rgb(np.stack((hue, sat, val), axis = -1))
