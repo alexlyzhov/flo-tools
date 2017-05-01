@@ -22,9 +22,9 @@ Visualization.ipynb features
 - L1 difference visualization between predicted flow and ground truth
 - Computing end-point error and angular error
 
-## Warping.ipynb
+## Image warping
 
-Take one image and warp it to another with optical flow. Options include
+Warping.ipynb takes one image and warps it to another with optical flow. Options include
 
 - Initialize with black background or with image we have
 - Forward or backward direction
