@@ -71,10 +71,25 @@ def epe_error(flows):
 
 def ssd_error(images):
     '''
-    Returns sum of squared differences
+    Returns sum of squared differences between 2 images
     
     Keyword arguments:
-        images -- list-like structure containing two images
+        images -- list-like structure containing 2 images
     '''
-    return np.sum((intensity(images[0].astype(np.float) / 255) -
-                   intensity(images[1].astype(np.float) / 255)) ** 2)
+#    return np.sum((intensity(images[0].astype(np.float) / 255) -
+#                  intensity(images[1].astype(np.float) / 255)) ** 2)
+    channels = imgs[0].shape[2]
+    res = np.sum((images[0].astype(np.float) / 255 - images[1].astype(np.float) / 255) ** 2) / channels
+    return res
+
+def rms_error(images):
+    '''
+    Returns root mean square difference between 2 images
+    
+    Keyword arguments:
+        images -- list-like structure containing 2 images
+    '''
+#    return np.sqrt(np.mean((intensity(images[0].astype(np.float) / 255) -
+#                   intensity(images[1].astype(np.float) / 255)) ** 2))
+    res = np.sqrt(np.mean((images[0].astype(np.float) / 255 - images[1].astype(np.float) / 255) ** 2))
+    return res

@@ -24,15 +24,5 @@ def read_flo(path):
     resized = np.resize(data, (h, w, 2))
     return resized
 
-def read_flows(flow_patterns, n):
-    flows = [[read_flo(pat.format(img_num)) for pat in flow_patterns] for img_num in xrange(n)]
-    return flows
-
-def read_imgs(img_patterns, n):
-    imgs = [[mpimg.imread(img_pat.format(img_num)) for img_pat in img_patterns] for img_num in xrange(n)]
-    return imgs
-
-def read_flows_imgs(flow_patterns, img_patterns, n):
-    flows = read_flows(flow_patterns, n)
-    imgs = read_imgs(img_patterns, n)
-    return flows, imgs
+def read_img(path):
+    return mpimg.imread(path)

@@ -11,13 +11,13 @@ def flow_to_color(flow, norm):
         flow -- optical flow to colorcode
     '''
     rho = np.sqrt(flow[:, :, 0] ** 2 + flow[:, :, 1] ** 2)
-    max_rho = np.max(rho)
     phi = np.arctan2(flow[:, :, 1], flow[:, :, 0])
     phi[phi < 0] = 2 * np.pi + phi[phi < 0]
     
     hue = phi / (2 * np.pi)
     if norm:
-        sat = rho / max_rho
+        sat = rho / np.max(rho)
+#        sat = np.minimum(rho / 10, np.ones_like(rho))
     else:
         sat = rho
     val = np.ones((flow.shape[0], flow.shape[1]))
