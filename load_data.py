@@ -22,7 +22,7 @@ def read_flows_imgs(flow_patterns, img_patterns, n):
 
 def get_data(dataset, name):
     if dataset == 'huawei':
-        flo_dir = img_dir = '../huawei/cropped/' + name
+        flo_dir = img_dir = 'data/huawei/' + name
         
         if '1027' in name:
             img_ext = 'png'
@@ -30,40 +30,20 @@ def get_data(dataset, name):
             img_ext = 'jpg'
     elif dataset == 'cells':
         (imgs_name, flows_name) = name.split('/')
-        flo_dir = '../cells/' + name
-        img_dir = '../cells/' + imgs_name
+        flo_dir = 'data/cells/' + name
+        img_dir = 'data/cells/' + imgs_name
         
         img_ext = 'png'
         
         if 'gap1' not in name:
             raise Exception
-    elif dataset == 'mydata':
+    elif dataset == 'ref':
         all_flows, all_imgs = read_flows_imgs(
-            flow_patterns = ['mydata/flownets-pred-{0:0>7}.flo'],
-            img_patterns = ['mydata/1.bmp', 'mydata/2.bmp'],
-            n = 1
-        )
-        flow_labels = ['FlowNetS']
-    elif dataset == 'mydata_small':
-        all_flows, all_imgs = read_flows_imgs(
-            flow_patterns = ['mydata_small/flownets-pred-{0:0>7}.flo'],
-            img_patterns = ['mydata_small/1.bmp', 'mydata_small/2.bmp'],
-            n = 1
-        )
-        flow_labels = ['FlowNetS']
-    elif dataset == 'flownetdata':
-        all_flows, all_imgs = read_flows_imgs(
-            flow_patterns = ['data/{0:0>7}-gt.flo', 'data/flownets-pred-{0:0>7}.flo',
-                             'data/flownet2-pred-{0:0>7}.flo'],
-            img_patterns = ['data/{0:0>7}-img0.ppm', 'data/{0:0>7}-img1.ppm'],
+            flow_patterns = ['data/ref/{0:0>7}-gt.flo', 'data/ref/flownets-pred-{0:0>7}.flo',
+                             'data/ref/flownet2-pred-{0:0>7}.flo'],
+            img_patterns = ['data/ref/{0:0>7}-img0.ppm', 'data/ref/{0:0>7}-img1.ppm'],
             n = 8)
         flow_labels = ['Ground truth', 'FlowNetS', 'FlowNet2']
-    elif dataset == 'flownetdata_small':
-        all_flows, all_imgs = read_flows_imgs(
-            flow_patterns = ['data_small/{0:0>7}-gt.flo', 'data_small/flownets-pred-{0:0>7}.flo'],
-            img_patterns = ['data_small/{0:0>7}-img0.ppm', 'data_small/{0:0>7}-img1.ppm'],
-            n = 8)
-        flow_labels = ['Ground truth', 'FlowNetS']
     else:
         raise Exception
         

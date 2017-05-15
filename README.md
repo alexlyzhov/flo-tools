@@ -1,5 +1,7 @@
 # flo-tools
 
+[Download test data on dropbox](https://www.dropbox.com/sh/ooqzcqaz0aqtfwn/AAC2VTVnr-aeojF7bOu4uFiZa?dl=0)
+
 ## Optical flow from webcam stream
 
 Video.ipynb takes webcam stream and computes optical flow between pairs of frames. Works with FlowNetPytorch pretrained on Flying Chairs.

@@ -1,9 +1,6 @@
 *.pyc
 nasonov_warp
 data
-mydata
-data_small
-mydata_small
 new_dataset
 .ipynb_checkpoints
 md_test.sh
