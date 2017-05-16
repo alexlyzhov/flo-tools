@@ -48,11 +48,14 @@ def load(dataset, name, get_dirs = False):
             n = 8)
         flow_labels = ['Ground truth', 'FlowNetS', 'FlowNet2']
         is_gray = False
+        flo_dir = img_dir = 'data/ref'
     else:
         raise Exception
         
     if dataset == 'huawei' or dataset == 'cells':
-        n = len(glob.glob1(img_dir, "*." + img_ext)) - 1
+        n = len(glob.glob1(img_dir, '*.' + img_ext)) - 1
+        if img_ext == 'png' and img_dir == flo_dir:
+            n -= len(glob.glob1(flo_dir, 'vis_*.png')) # exclude the number of visualization results in the same folder
 
         img_pairs = read_img_laps(img_dir + '/{0}.' + img_ext, n, first = 1)
         
